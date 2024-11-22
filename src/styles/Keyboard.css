@@ -1,0 +1,32 @@
+/* Styles for the virtual keyboard container */
+.Keyboard {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 8px; /* Reduced gap between keys */
+  margin: 20px auto; /* Added spacing above and below */
+  padding: 0 20px; /* Padding to move keyboard away from edges */
+}
+
+/* Individual key button styles */
+.key {
+  padding: 8px; /* Reduced button size */
+  font-size: 1rem; /* Reduced font size */
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for key buttons */
+.key:hover {
+  background-color: #ddd;
+}
+
+/* Disabled keys styling (already guessed) */
+.key:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

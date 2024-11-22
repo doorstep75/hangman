@@ -1,0 +1,19 @@
+/* Styles for displaying the guessed word */
+.WordDisplay {
+  display: flex;
+  gap: 10px;
+  margin: 40px auto; /* Increased spacing above and below */
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: center; /* Center the word display */
+  padding: 0 20px; /* Add padding on the sides to move away from edges */
+}
+
+/* Styles for individual letters or underscores */
+.letter {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  border-bottom: 2px solid #333;
+  text-transform: uppercase;
+}

@@ -1,0 +1,11 @@
+/* Styles for the header section */
+.Header {
+  margin-bottom: 20px;
+  text-align: center;
+  }
+  
+  /* Title text styling */
+  .Header h1 {
+  font-size: 2.5rem;
+  color: #222;
+  }
