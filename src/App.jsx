@@ -1,48 +1,41 @@
+/* NOTE: I do take on board where you reference I use 'too many comments' but at this stage they are useful for
+me for when I wish to look at my work later and reference how I tackled particular areas of code*/
 import React, { useState } from "react";
-import Header from "./components/Header";
-import HangmanGraphic from "./components/HangmanGraphic";
-import WordDisplay from "./components/WordDisplay";
-import Keyboard from "./components/Keyboard";
-import GameControls from "./components/GameControls";
-import randomWords from "./randomWords";
+import Header from "./components/Header"; // Header
+import HangmanGraphic from "./components/HangmanGraphic"; // Hangman graphic
+import WordDisplay from "./components/WordDisplay"; // Word display
+import Keyboard from "./components/Keyboard"; // Keyboard for guessing letters
+import GameControls from "./components/GameControls"; // Game controls (restart, status)
+import Help from "./components/Help"; // Help feature
+import randomWords from "./randomWords"; // Word list
 
 function App() {
-  // Game state
+  // Game state management
   const [wordToGuess, setWordToGuess] = useState(
-    randomWords[Math.floor(Math.random() * randomWords.length)] // Pick a random word
+    randomWords[Math.floor(Math.random() * randomWords.length)]
   );
-  const [guessedLetters, setGuessedLetters] = useState([]); // Tracks guessed letters
-  const [wrongGuesses, setWrongGuesses] = useState(0); // Tracks incorrect guesses
-  const [gameStatus, setGameStatus] = useState("playing"); // "playing", "won", "lost"
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wrongGuesses, setWrongGuesses] = useState(0);
+  const [gameStatus, setGameStatus] = useState("playing");
 
-  // Function to handle letter guesses
+  // Handle guesses
   const handleGuess = (letter) => {
-    // Prevent additional guesses if the game is over or the letter is already guessed
     if (guessedLetters.includes(letter) || gameStatus !== "playing") return;
-  
     setGuessedLetters([...guessedLetters, letter]);
-  
+
     if (!wordToGuess.includes(letter)) {
       const newWrongGuesses = wrongGuesses + 1;
       setWrongGuesses(newWrongGuesses);
-  
-      // End the game if wrong guesses reach the limit (8)
-      if (newWrongGuesses >= 9) {
-        setGameStatus("lost");
-      }
+      if (newWrongGuesses >= 9) setGameStatus("lost");
     }
-  
-    // Check if all letters are guessed correctly
+
     const allLettersGuessed = wordToGuess
       .split("")
       .every((l) => guessedLetters.includes(l) || l === letter);
-  
-    if (allLettersGuessed) {
-      setGameStatus("won");
-    }
+    if (allLettersGuessed) setGameStatus("won");
   };
 
-  // Restart the game
+  // Restart game
   const restartGame = () => {
     setWordToGuess(randomWords[Math.floor(Math.random() * randomWords.length)]);
     setGuessedLetters([]);
@@ -52,11 +45,12 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <HangmanGraphic wrongGuesses={wrongGuesses} />
-      <WordDisplay wordToGuess={wordToGuess} guessedLetters={guessedLetters} />
-      <Keyboard handleGuess={handleGuess} guessedLetters={guessedLetters} />
-      <GameControls gameStatus={gameStatus} restartGame={restartGame} />
+      <Header /> {/* Game header */}
+      <Help /> {/* Help feature */}
+      <HangmanGraphic wrongGuesses={wrongGuesses} /> {/* Hangman graphic */}
+      <WordDisplay wordToGuess={wordToGuess} guessedLetters={guessedLetters} /> {/* Word */}
+      <Keyboard handleGuess={handleGuess} guessedLetters={guessedLetters} /> {/* Keyboard */}
+      <GameControls gameStatus={gameStatus} restartGame={restartGame} /> {/* Controls */}
     </div>
   );
 }
